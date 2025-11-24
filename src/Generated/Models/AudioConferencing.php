@@ -11,13 +11,13 @@ use Microsoft\Kiota\Abstractions\Store\BackingStore;
 use Microsoft\Kiota\Abstractions\Store\BackingStoreFactorySingleton;
 use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
-class AudioConferencing implements AdditionalDataHolder, BackedModel, Parsable 
+class AudioConferencing implements AdditionalDataHolder, BackedModel, Parsable
 {
     /**
      * @var BackingStore $backingStore Stores model information.
     */
     private BackingStore $backingStore;
-    
+
     /**
      * Instantiates a new AudioConferencing and sets the default values.
     */
@@ -94,6 +94,7 @@ class AudioConferencing implements AdditionalDataHolder, BackedModel, Parsable
             'tollFreeNumbers' => function (ParseNode $n) {
                 $val = $n->getCollectionOfPrimitiveValues();
                 if (is_array($val)) {
+                    $val = array_values(array_filter($val));
                     TypeUtils::validateCollectionValues($val, 'string');
                 }
                 /** @var array<string>|null $val */
